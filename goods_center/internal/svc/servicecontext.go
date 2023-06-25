@@ -1,0 +1,15 @@
+package svc
+
+import (
+	"goods_center/internal/config"
+)
+
+type ServiceContext struct {
+	Config config.Config
+}
+
+func NewServiceContext(c config.Config) *ServiceContext {
+	return &ServiceContext{
+		Config: c,
+	}
+}

@@ -1,0 +1,42 @@
+type (
+
+	// 获取单个商品信息
+	GetSpuInfoReq {
+		AppId string `json:"app_id"` //店铺id
+		SpuId string `json:"spu_id"` //商品id
+	}
+
+	GetSpuInfoResp {
+		Id              uint64 `json:"id"`
+		AppId           string `json:"app_id"`            //店铺id
+		SpuId           string `json:"spu_id"`            //商品id
+		SpuType         string `json:"spu_type"`          //商品类型(关联t_spu_type)
+		GoodsCategoryId string `json:"goods_category_id"` //商品分类id
+		GoodsName       string `json:"goods_name"`        //商品名称
+		GoodsImg        string `json:"goods_img"`         //商品封面图（默认封面图）
+		Price           int    `json:"price"`             //商品最低价
+		PriceLine       int    `json:"price_line"`        //划线价
+		GoodsTag        string `json:"goods_tag"`         //商品标签
+		SaleStatus      int8   `json:"sale_status"`       //上架状态： 0下架 1上架 2（定时上架还未上架阶段）待上架 4强制下架 5封禁
+		SaleAt          int64  `json:"sale_at"`           //实际上架的时间
+		IsDisplay       int8   `json:"is_display"`        //是否显示：0否(隐藏状态) 1是(显示状态)
+		LimitPurchase   int    `json:"limit_purchase"`    //限购数量
+		StockDeductMode int8   `json:"stock_deduct_mode"` //扣库存方式：0付款减库存 1拍下减库存
+		IsDeleted       int8   `json:"is_deleted"`        //0正常 1已删除
+		CreatedAt       int64  `json:"created_at"`        //创建时间
+		UpdatedAt       int64  `json:"updated_at"`        //更新时间，有修改自动更新
+	}
+)
+
+@server (
+	group: spu
+	prefix: /v1
+)
+
+service spu {
+	@handler getSpuInfo
+	post /spu/info/get (GetSpuInfoReq) returns (GetSpuInfoResp)
+	
+	@handler getSpuList
+	post /spu/list/get (GetSpuInfoReq) returns (GetSpuInfoResp)
+}
