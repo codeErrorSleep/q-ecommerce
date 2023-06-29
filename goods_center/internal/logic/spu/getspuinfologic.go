@@ -2,6 +2,7 @@ package spu
 
 import (
 	"context"
+	"fmt"
 
 	"goods_center/internal/svc"
 	"goods_center/internal/types"
@@ -24,8 +25,14 @@ func NewGetSpuInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSpu
 }
 
 func (l *GetSpuInfoLogic) GetSpuInfo(req *types.GetSpuInfoReq) (resp *types.GetSpuInfoResp, err error) {
-	// todo: add your logic here and delete this line
+	spuData, err := l.svcCtx.SpuModel.FindOne(l.ctx, 1)
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	resp = new(types.GetSpuInfoResp)
-	resp.AppId = "dfassdfa"
+	resp.AppId = spuData.AppId
+	resp.GoodsName = spuData.GoodsName
+
 	return
 }
