@@ -26,7 +26,23 @@ ecommerce system by go-zero,mysql,es,redis
 
 # 商品中心
 
-`
+
+
+
+
+
+
+# 数据准备
+
+prepore_data上有生成数据的python脚本
+
+可以用来生成对应的数据
+
+
+
+
+
+
 
 
 
