@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"goods_center/internal/svc"
-	"goods_center/internal/types"
+	"api/internal/svc"
+	"api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,9 +30,11 @@ func (l *GetSpuInfoLogic) GetSpuInfo(req *types.GetSpuInfoReq) (resp *types.GetS
 		fmt.Println(err)
 	}
 
+	fmt.Println("dsfadsfasd")
+	fmt.Println(spuData)
+
 	resp = new(types.GetSpuInfoResp)
 	resp.AppId = spuData.AppId
 	resp.GoodsName = spuData.GoodsName
-
 	return
 }

@@ -3,8 +3,8 @@ package spu
 import (
 	"context"
 
-	"goods_center/internal/svc"
-	"goods_center/internal/types"
+	"api/internal/svc"
+	"api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

@@ -1,6 +1,6 @@
-module goods_center
+module api
 
-go 1.18
+go 1.19
 
 require github.com/zeromicro/go-zero v1.5.3
 

@@ -1,0 +1,7 @@
+import "spu.api"
+
+info(
+	desc: "goods-center"
+	author: "qiushao"
+	email: "504250439@qq.com"
+)

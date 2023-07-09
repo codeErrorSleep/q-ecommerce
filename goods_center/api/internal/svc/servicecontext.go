@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"goods_center/internal/config"
-	"goods_center/model"
+	"api/internal/config"
+	"api/model"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
@@ -14,7 +14,6 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
-
 	return &ServiceContext{
 		Config:   c,
 		SpuModel: model.NewTSpuModel(sqlConn),

@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	spu "goods_center/internal/handler/spu"
-	"goods_center/internal/svc"
+	spu "api/internal/handler/spu"
+	"api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
