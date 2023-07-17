@@ -1,21 +1,20 @@
 package svc
 
 import (
-	"api/internal/config"
-	"api/model"
+	"goods_center/api/internal/config"
+	"goods_center/rpc/spuclient"
 
-	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type ServiceContext struct {
-	Config   config.Config
-	SpuModel model.TSpuModel
+	Config config.Config
+	RPC    spuclient.Spu
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		Config:   c,
-		SpuModel: model.NewTSpuModel(sqlConn),
+		Config: c,
+		RPC:    spuclient.NewSpu(zrpc.MustNewClient(c.RPC)),
 	}
 }

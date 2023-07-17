@@ -1,5 +1,4 @@
 type (
-
 	// 获取单个商品信息
 	GetSpuInfoReq {
 		AppId string `json:"app_id"` //店铺id

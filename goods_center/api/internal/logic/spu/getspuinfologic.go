@@ -2,10 +2,10 @@ package spu
 
 import (
 	"context"
-	"fmt"
 
-	"api/internal/svc"
-	"api/internal/types"
+	"goods_center/api/internal/svc"
+	"goods_center/api/internal/types"
+	"goods_center/rpc/spu"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,16 +25,20 @@ func NewGetSpuInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSpu
 }
 
 func (l *GetSpuInfoLogic) GetSpuInfo(req *types.GetSpuInfoReq) (resp *types.GetSpuInfoResp, err error) {
-	spuData, err := l.svcCtx.SpuModel.FindOne(l.ctx, 1)
+	// todo: add your logic here and delete this line
+
+	spuInfo, err := l.svcCtx.RPC.GetSpuInfo(l.ctx, &spu.GetSpuInfoRequest{AppId: req.AppId, SpuId: req.SpuId})
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
-	fmt.Println("dsfadsfasd")
-	fmt.Println(spuData)
+	fff := types.GetSpuInfoResp{AppId: "aaaaa"}
 
-	resp = new(types.GetSpuInfoResp)
-	resp.AppId = spuData.AppId
-	resp.GoodsName = spuData.GoodsName
-	return
+	if len(spuInfo.Products) == 0 {
+		return &fff, nil
+	}
+
+	fff.AppId = spuInfo.Products[0].AppId
+
+	return &fff, nil
 }

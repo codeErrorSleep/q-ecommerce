@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package spu;
+option go_package="./spu";
+
+service Spu {
+  rpc GetSpuInfo(GetSpuInfoRequest) returns(GetSpuInfoResponse);
+}
+
+message  GetSpuInfoRequest{
+  string app_id = 1;
+  string spu_id = 2;
+}
+
+message GetSpuInfoResponse {
+  repeated SpuInfo products = 1;
+}
+
+message SpuInfo {
+  uint64 id = 1;
+  string app_id = 2; // 店铺id
+  string spu_id = 3; // 商品id
+  string spu_type = 4; // 商品类型(关联t_spu_type)
+  string goods_category_id = 5; // 商品分类id
+  string goods_name = 6; // 商品名称
+  string goods_img = 7; // 商品封面图（默认封面图）
+  int32 price = 8; // 商品最低价
+  int32 price_line = 9; // 划线价
+  string goods_tag = 10; // 商品标签
+  int32 sale_status = 11; // 上架状态： 0下架 1上架 2（定时上架还未上架阶段）待上架 4强制下架 5封禁
+  string sale_at = 12; // 实际上架的时间
+  int32 is_display = 13; // 是否显示：0否(隐藏状态) 1是(显示状态)
+  int32 limit_purchase = 14; // 限购数量
+  int32 stock_deduct_mode = 15; // 扣库存方式：0付款减库存 1拍下减库存
+  int32 is_deleted = 16; // 0正常 1已删除
+  string created_at = 17; // 创建时间
+  string updated_at = 18; // 更新时间，有修改自动更新
+}
