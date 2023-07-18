@@ -25,20 +25,13 @@ func NewGetSpuInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSpu
 }
 
 func (l *GetSpuInfoLogic) GetSpuInfo(req *types.GetSpuInfoReq) (resp *types.GetSpuInfoResp, err error) {
-	// todo: add your logic here and delete this line
-
 	spuInfo, err := l.svcCtx.RPC.GetSpuInfo(l.ctx, &spu.GetSpuInfoRequest{AppId: req.AppId, SpuId: req.SpuId})
 	if err != nil {
 		return nil, err
 	}
+	resp = new(types.GetSpuInfoResp)
+	resp.AppId = spuInfo.SpuInfo.AppId
+	resp.SpuId = spuInfo.SpuInfo.SpuId
 
-	fff := types.GetSpuInfoResp{AppId: "aaaaa"}
-
-	if len(spuInfo.Products) == 0 {
-		return &fff, nil
-	}
-
-	fff.AppId = spuInfo.Products[0].AppId
-
-	return &fff, nil
+	return resp, nil
 }

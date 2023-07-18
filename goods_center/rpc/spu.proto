@@ -13,7 +13,7 @@ message  GetSpuInfoRequest{
 }
 
 message GetSpuInfoResponse {
-  repeated SpuInfo products = 1;
+ SpuInfo SpuInfo = 1;
 }
 
 message SpuInfo {

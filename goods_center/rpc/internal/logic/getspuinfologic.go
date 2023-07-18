@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-	"fmt"
 
 	"goods_center/rpc/internal/svc"
 	"goods_center/rpc/spu"
 
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -25,17 +25,28 @@ func NewGetSpuInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSpu
 }
 
 func (l *GetSpuInfoLogic) GetSpuInfo(in *spu.GetSpuInfoRequest) (*spu.GetSpuInfoResponse, error) {
-	// todo: add your logic here and delete this line
-	fmt.Println("inside", in)
-
-	if in.AppId == "1" {
-		fmt.Println("dfsadfasd")
+	if in == nil || in.AppId == "" {
+		logc.Info(l.ctx, "input wrong", in)
+	}
+	// time.Sleep(time.Second * 2)
+	spuModel, err := l.svcCtx.SpuModel.FindOneByAppIdSpuId(l.ctx, in.AppId, in.SpuId)
+	if err != nil {
+		logc.Info(l.ctx, "find spu error")
 	}
 
-	spuinfo := spu.SpuInfo{AppId: "dfsadaf", SpuId: "dfffffjj"}
-
 	ret := spu.GetSpuInfoResponse{
-		Products: []*spu.SpuInfo{&spuinfo},
+		SpuInfo: &spu.SpuInfo{},
+	}
+
+	if spuModel == nil {
+		return &ret, nil
+	}
+
+	ret = spu.GetSpuInfoResponse{
+		SpuInfo: &spu.SpuInfo{
+			AppId: spuModel.AppId,
+			SpuId: spuModel.SpuId,
+		},
 	}
 
 	return &ret, nil
