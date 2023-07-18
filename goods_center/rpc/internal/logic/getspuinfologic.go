@@ -6,8 +6,8 @@ import (
 	"goods_center/rpc/internal/svc"
 	"goods_center/rpc/spu"
 
-	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/status"
 )
 
 type GetSpuInfoLogic struct {
@@ -26,12 +26,11 @@ func NewGetSpuInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSpu
 
 func (l *GetSpuInfoLogic) GetSpuInfo(in *spu.GetSpuInfoRequest) (*spu.GetSpuInfoResponse, error) {
 	if in == nil || in.AppId == "" {
-		logc.Info(l.ctx, "input wrong", in)
+		return nil, status.Error(100, "参数异常")
 	}
-	// time.Sleep(time.Second * 2)
 	spuModel, err := l.svcCtx.SpuModel.FindOneByAppIdSpuId(l.ctx, in.AppId, in.SpuId)
 	if err != nil {
-		logc.Info(l.ctx, "find spu error")
+		return nil, status.Error(500, "rpc error")
 	}
 
 	ret := spu.GetSpuInfoResponse{

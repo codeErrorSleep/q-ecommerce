@@ -37,7 +37,7 @@ func (m *defaultTSpuModel) FindOneByAppIdSpuId(ctx context.Context, appId string
 	case nil:
 		return &resp, nil
 	case sqlc.ErrNotFound:
-		return nil, ErrNotFound
+		return nil, nil
 	default:
 		return nil, err
 	}

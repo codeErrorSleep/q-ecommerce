@@ -6,7 +6,7 @@ type GetSpuInfoReq struct {
 	SpuId string `json:"spu_id"` //商品id
 }
 
-type GetSpuInfoResp struct {
+type Spu struct {
 	Id              uint64 `json:"id"`
 	AppId           string `json:"app_id"`            //店铺id
 	SpuId           string `json:"spu_id"`            //商品id
@@ -25,4 +25,18 @@ type GetSpuInfoResp struct {
 	IsDeleted       int8   `json:"is_deleted"`        //0正常 1已删除
 	CreatedAt       int64  `json:"created_at"`        //创建时间
 	UpdatedAt       int64  `json:"updated_at"`        //更新时间，有修改自动更新
+}
+
+type GetSpuInfoRespData struct {
+	SpuInfo Spu `json:"spu_info"`
+}
+
+type GetSpuInfoResp struct {
+	Base
+	Data GetSpuInfoRespData `json:"data"`
+}
+
+type Base struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
 }
