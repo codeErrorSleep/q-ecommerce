@@ -6,3 +6,10 @@ RPC:
       Hosts:
         - 127.0.0.1:2379
       Key: spu.rpc
+
+#链路追踪
+Telemetry:
+  Name: goods-api
+  Endpoint: http://localhost:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger

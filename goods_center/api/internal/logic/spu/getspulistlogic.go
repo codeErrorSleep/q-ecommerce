@@ -7,6 +7,7 @@ import (
 	"goods_center/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/status"
 )
 
 type GetSpuListLogic struct {
@@ -24,7 +25,9 @@ func NewGetSpuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetSpu
 }
 
 func (l *GetSpuListLogic) GetSpuList(req *types.GetSpuInfoReq) (resp *types.GetSpuInfoResp, err error) {
-	// todo: add your logic here and delete this line
 
-	return
+	resp = new(types.GetSpuInfoResp)
+	resp.Data.SpuInfo.AppId = "1211"
+
+	return resp, status.Error(110, "dsfadsfas")
 }

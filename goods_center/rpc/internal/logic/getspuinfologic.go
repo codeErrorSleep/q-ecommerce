@@ -48,5 +48,7 @@ func (l *GetSpuInfoLogic) GetSpuInfo(in *spu.GetSpuInfoRequest) (*spu.GetSpuInfo
 		},
 	}
 
+	l.Logger.Debug()
+
 	return &ret, nil
 }

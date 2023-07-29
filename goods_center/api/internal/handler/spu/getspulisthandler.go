@@ -3,10 +3,11 @@ package spu
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"goods_center/api/internal/logic/spu"
 	"goods_center/api/internal/svc"
 	"goods_center/api/internal/types"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func GetSpuListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
